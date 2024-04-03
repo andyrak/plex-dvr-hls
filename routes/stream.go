@@ -26,7 +26,7 @@ func Stream(c *gin.Context) {
 	var transcode = c.Query("transcode")
 
 	var protocol = "https"
-	if config.Cfg.Https {
+	if !config.Cfg.Https {
 		protocol = "http"
 	}
 

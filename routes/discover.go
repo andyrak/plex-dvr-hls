@@ -33,7 +33,7 @@ func Discover(c *gin.Context) {
 	var host = c.Request.Host
 
 	var protocol = "https"
-	if config.Cfg.Https {
+	if !config.Cfg.Https {
 		protocol = "http"
 	}
 
