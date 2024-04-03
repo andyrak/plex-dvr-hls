@@ -25,6 +25,11 @@ func Stream(c *gin.Context) {
 	var channel = config.Channels[channelID-1]
 	var transcode = c.Query("transcode")
 
+	var protocol = "https"
+	if config.Cfg.Https {
+		protocol = "http"
+	}
+
 	log.Printf("[STREAM] Starting '%s'\n", channel.Name)
 
 	c.Header("Content-Type", "video/mp2t")
@@ -35,7 +40,7 @@ func Stream(c *gin.Context) {
 		ffmpegArgs = append(
 			ffmpegArgs,
 			"-http_proxy",
-			fmt.Sprintf("http://%s:%s@%s", channel.ProxyConfig.Username, channel.ProxyConfig.Password, channel.ProxyConfig.Host),
+			fmt.Sprintf("%s://%s:%s@%s", protocol, channel.ProxyConfig.Username, channel.ProxyConfig.Password, channel.ProxyConfig.Host),
 		)
 	}
 

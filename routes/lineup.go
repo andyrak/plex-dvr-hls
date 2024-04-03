@@ -20,6 +20,11 @@ func Lineup(c *gin.Context) {
 
 	var host = c.Request.Host
 
+	var protocol = "https"
+	if config.Cfg.Https {
+		protocol = "http"
+	}
+
 	for index, channel := range config.Channels {
 		channelLineups = append(
 			channelLineups,
@@ -27,7 +32,7 @@ func Lineup(c *gin.Context) {
 				GuideNumber: fmt.Sprintf("%d", index+1),
 				GuideName:   channel.Name,
 				Tags:        make([]string, 0),
-				URL:         fmt.Sprintf("http://%s/stream/%d", host, index+1),
+				URL:         fmt.Sprintf("%s://%s/stream/%d", protocol, host, index+1),
 			},
 		)
 	}

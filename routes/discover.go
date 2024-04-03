@@ -32,6 +32,11 @@ func Discover(c *gin.Context) {
 
 	var host = c.Request.Host
 
+	var protocol = "https"
+	if config.Cfg.Https {
+		protocol = "http"
+	}
+
 	c.JSON(
 		http.StatusOK,
 		DVR{
@@ -42,8 +47,8 @@ func Discover(c *gin.Context) {
 			FirmwareVersion: "20150826",
 			DeviceID:        fmt.Sprintf("%d", deviceID),
 			DeviceAuth:      "test1234",
-			BaseURL:         fmt.Sprintf("http://%s", host),
-			LineupURL:       fmt.Sprintf("http://%s/lineup.json", host),
+			BaseURL:         fmt.Sprintf("%s://%s", protocol, host),
+			LineupURL:       fmt.Sprintf("%s://%s/lineup.json", protocol, host),
 			Manufacturer:    "Silicondust",
 		},
 	)
