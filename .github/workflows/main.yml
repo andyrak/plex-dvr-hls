@@ -69,7 +69,7 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: |
-            hub.docker.com/repository/docker/andyrak/plex-dvr-hls
+            andyrak/plex-dvr-hls
           flavor: |
             latest=false
           tags: |
