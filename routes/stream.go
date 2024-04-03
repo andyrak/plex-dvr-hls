@@ -91,7 +91,6 @@ func Stream(c *gin.Context) {
 				"-c:v",
 				"h264_videotoolbox",
 			)
-			break
 		case config.EncoderProfileVAAPI:
 			ffmpegArgs = append(
 				ffmpegArgs,
@@ -100,14 +99,12 @@ func Stream(c *gin.Context) {
 				"-vf",
 				"scale_vaapi=format=nv12,hwupload",
 			)
-			break
 		case config.EncoderProfileOMX:
 			ffmpegArgs = append(
 				ffmpegArgs,
 				"-c:v",
 				"h264_omx",
 			)
-			break
 		default:
 			ffmpegArgs = append(
 				ffmpegArgs,
@@ -116,7 +113,6 @@ func Stream(c *gin.Context) {
 				"-preset",
 				"superfast",
 			)
-			break
 		}
 	}
 
@@ -149,7 +145,6 @@ func Stream(c *gin.Context) {
 			"-r",
 			"30",
 		)
-		break
 	}
 
 	ffmpegArgs = append(
