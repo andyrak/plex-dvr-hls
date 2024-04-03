@@ -1,4 +1,4 @@
-module github.com/duncanleo/plex-dvr-hls
+module github.com/andyrak/plex-dvr-hls
 
 go 1.21
 

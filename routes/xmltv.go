@@ -7,7 +7,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/duncanleo/plex-dvr-hls/config"
+	"github.com/andyrak/plex-dvr-hls/config"
 	"github.com/gin-gonic/gin"
 )
 
