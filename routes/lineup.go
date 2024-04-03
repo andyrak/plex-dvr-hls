@@ -25,16 +25,19 @@ func Lineup(c *gin.Context) {
 		protocol = "http"
 	}
 
-	for index, channel := range config.Channels {
+	var alteredIndex = config.Cfg.ChannelStart
+
+	for _, channel := range config.Channels {
 		channelLineups = append(
 			channelLineups,
 			ChannelLineup{
-				GuideNumber: fmt.Sprintf("%d", index+1),
+				GuideNumber: fmt.Sprintf("%d", alteredIndex),
 				GuideName:   channel.Name,
 				Tags:        make([]string, 0),
-				URL:         fmt.Sprintf("%s://%s/stream/%d", protocol, host, index+1),
+				URL:         fmt.Sprintf("%s://%s/stream/%d", protocol, host, alteredIndex),
 			},
 		)
+		alteredIndex++
 	}
 
 	c.JSON(

@@ -19,6 +19,7 @@ type Config struct {
 	Name           string          `json:"name"`
 	EncoderProfile *EncoderProfile `json:"encoder_profile"`
 	Https          bool            `json:"use_https"`
+	ChannelStart   int             `json:"channel_start"`
 }
 
 func (c Config) GetEncoderProfile() EncoderProfile {

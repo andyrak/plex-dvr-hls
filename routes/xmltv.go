@@ -26,15 +26,18 @@ type Programme struct {
 func XMLTV(c *gin.Context) {
 	var channels []ChannelSimplified
 
-	for index, channel := range config.Channels {
+	var alteredIndex = config.Cfg.ChannelStart
+
+	for _, channel := range config.Channels {
 		channels = append(
 			channels,
 			ChannelSimplified{
-				ID:   index + 1,
+				ID:   alteredIndex,
 				Name: channel.Name,
 				Logo: channel.Logo,
 			},
 		)
+		alteredIndex++
 	}
 
 	var programmes []Programme

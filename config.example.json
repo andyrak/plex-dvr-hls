@@ -1,5 +1,6 @@
 {
   "name": "Amazing Tuner",
   "encoder_profile": "cpu",
-  "use_https": true
+  "use_https": true,
+  "channel_start": 1
 }
