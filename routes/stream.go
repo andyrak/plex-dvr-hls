@@ -22,7 +22,7 @@ func Stream(c *gin.Context) {
 		return
 	}
 
-	var channel = config.Channels[channelID-1]
+	var channel = config.Channels[channelID-config.Cfg.ChannelStart]
 	var transcode = c.Query("transcode")
 
 	var protocol = "https"
