@@ -1,5 +1,5 @@
-FROM denismakogon/ffmpeg-alpine:4.0-buildstage as build-stage
-FROM golang:1.22-alpine as app-build
+FROM jrottenberg/ffmpeg:4.4-alpine as build-ffmpeg
+FROM golang:1.22-alpine as build-app
 
 WORKDIR /app
 COPY go.mod .
@@ -13,13 +13,10 @@ RUN go build -o /bin/app cmd/*.go
 
 FROM alpine:3.15.0 as app
 
-# Copy ffmpeg runtime https://github.com/denismakogon/ffmpeg-alpine#custom-runtime
-COPY --from=build-stage /tmp/fakeroot/bin /usr/local/bin
-COPY --from=build-stage /tmp/fakeroot/share /usr/local/share
-COPY --from=build-stage /tmp/fakeroot/include /usr/local/include
-COPY --from=build-stage /tmp/fakeroot/lib /usr/local/lib
+# Copy ffmpeg runtime https://github.com/jrottenberg/ffmpeg
+COPY --from=build-ffmpeg /usr/local /usr/local
 
-COPY --from=app-build /bin/app /bin/app
+COPY --from=build-app /bin/app /bin/app
 WORKDIR /app
 
 COPY templates/ ./templates/
