@@ -1,4 +1,4 @@
-FROM jrottenberg/ffmpeg:4.4-alpine as build-ffmpeg
+FROM collelog/ffmpeg:4.4-alpine-rpi4-64 AS ffmpeg-image
 FROM golang:1.22-alpine as build-app
 
 WORKDIR /app
@@ -13,8 +13,8 @@ RUN go build -o /bin/app cmd/*.go
 
 FROM alpine:3.15.0 as app
 
-# Copy ffmpeg runtime https://github.com/jrottenberg/ffmpeg
-COPY --from=build-ffmpeg /usr/local /usr/local
+# Copy ffmpeg runtime https://github.com/collelog/ffmpeg
+COPY --from=ffmpeg-image /build /
 
 COPY --from=build-app /bin/app /bin/app
 WORKDIR /app
